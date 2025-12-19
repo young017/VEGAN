@@ -1,5 +1,5 @@
 # 🌱 Eco Veganism Chatbot (이오)
-https://veganism.streamlit.app/
+# https://veganism.streamlit.app/
 
 > **이 제품, 먹어도 될까?** - 식품 라벨 분석 및 비건 정보 제공 AI 챗봇
 
