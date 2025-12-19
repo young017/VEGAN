@@ -2,6 +2,8 @@
 
 > **이 제품, 먹어도 될까?** - 식품 라벨 분석 및 비건 정보 제공 AI 챗봇
 
+배포 주소 : https://veganism.streamlit.app/
+
 [![Python](https://img.shields.io/badge/Python-3.8+-blue.svg)](https://www.python.org/)
 [![Streamlit](https://img.shields.io/badge/Streamlit-1.45.1-red.svg)](https://streamlit.io/)
 [![License](https://img.shields.io/badge/License-Educational-green.svg)](LICENSE)
