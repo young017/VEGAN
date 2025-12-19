@@ -1,0 +1,13 @@
+streamlit==1.45.1
+pandas
+openai
+requests
+python-dotenv
+google-cloud-vision>=3.5.0
+
+langchain
+langchain-community
+langchain-openai
+
+faiss-cpu==1.7.4
+numpy==1.26.4
