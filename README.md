@@ -30,42 +30,53 @@
 
 ```mermaid
 graph LR
-    A[main.py] -->|page = start| B[start.py]
-    A -->|page = infoslide| C[infoslide.py]
-    A -->|page = chatbot| D[chatbot.py]
-    A -->|page = info| E[info.py]
+    classDef main fill:#1b5e20,stroke:#1b5e20,color:#fff,font-weight:bold
+    classDef module fill:#4CAF50,stroke:#388E3C,color:#fff
+    A[main.py]:::main -->|page = start| B[start.py]:::module
+    A -->|page = infoslide| C[infoslide.py]:::module
+    A -->|page = chatbot| D[chatbot.py]:::module
+    A -->|page = info| E[info.py]:::module
 ```
 
 ### 챗봇 응답 파이프라인
 
 ```mermaid
 flowchart TD
-    A[사용자 입력] --> B{인사말 감지}
-    B -->|Yes| C[고정 응답 반환]
-    B -->|No| D{칼로리 총합?}
-    D -->|Yes| E[calorie_scores 합산]
-    D -->|No| F{환경 점수 계산?}
-    F -->|Yes| G[calculate_environmental_impact_with_score]
-    F -->|No| H{키워드 필터}
-    H -->|비관련| I[안내 메시지]
-    H -->|관련| J{환경 영향 질문?}
-    J -->|Yes| K[calculate_environmental_impact\nFAISS → difflib 유사도 → DataFrame]
-    J -->|No| L[RAG 체인 실행]
-    L --> M[GPT 질문 유형 분류\nv / a / n / e]
-    M --> N[유형별 프롬프트 재구성]
-    N --> O[최종 응답\nRAG 답변 + GPT 부연]
-    O --> P{g 단위 포함?}
-    P -->|Yes| Q[store_score_from_response]
+    classDef input  fill:#1b5e20,stroke:#1b5e20,color:#fff,font-weight:bold
+    classDef decide fill:#2E7D32,stroke:#1b5e20,color:#fff
+    classDef proc   fill:#4CAF50,stroke:#388E3C,color:#fff
+    classDef out    fill:#A5D6A7,stroke:#4CAF50,color:#1b5e20
+
+    A[사용자 입력]:::input --> B{인사말 감지}:::decide
+    B -->|Yes| C[고정 응답 반환]:::out
+    B -->|No| D{칼로리 총합?}:::decide
+    D -->|Yes| E[calorie_scores 합산]:::out
+    D -->|No| F{환경 점수 계산?}:::decide
+    F -->|Yes| G[calculate_environmental_impact_with_score]:::proc
+    F -->|No| H{키워드 필터}:::decide
+    H -->|비관련| I[안내 메시지]:::out
+    H -->|관련| J{환경 영향 질문?}:::decide
+    J -->|Yes| K[calculate_environmental_impact\nFAISS → difflib 유사도 → DataFrame]:::proc
+    J -->|No| L[RAG 체인 실행]:::proc
+    L --> M[GPT 질문 유형 분류\nv / a / n / e]:::proc
+    M --> N[유형별 프롬프트 재구성]:::proc
+    N --> O[최종 응답\nRAG 답변 + GPT 부연]:::out
+    O --> P{g 단위 포함?}:::decide
+    P -->|Yes| Q[store_score_from_response]:::proc
 ```
 
 ### FAISS 초기화 흐름
 
 ```mermaid
 flowchart LR
-    A[faiss_db_merged.zip] -->|최초 1회 압축 해제| B[faiss_db_merged/]
-    B -->|이중 구조 감지 시| C[내부 디렉토리]
-    C --> D[FAISS.load_local\ntext-embedding-3-large]
-    D --> E[session_state vectorstore]
+    classDef file   fill:#1b5e20,stroke:#1b5e20,color:#fff,font-weight:bold
+    classDef proc   fill:#4CAF50,stroke:#388E3C,color:#fff
+    classDef result fill:#A5D6A7,stroke:#4CAF50,color:#1b5e20,font-weight:bold
+
+    A[faiss_db_merged.zip]:::file -->|최초 1회 압축 해제| B[faiss_db_merged/]:::proc
+    B -->|이중 구조 감지 시| C[내부 디렉토리]:::proc
+    C --> D[FAISS.load_local\ntext-embedding-3-large]:::proc
+    D --> E[session_state vectorstore]:::result
 ```
 
 > [!NOTE]
