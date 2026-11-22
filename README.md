@@ -2,7 +2,7 @@
 
 식품 라벨 이미지를 업로드하면 OCR → RAG → GPT 파이프라인을 통해 비건 적합성, 알레르기, 칼로리, 환경 영향(LCA)을 개인화된 방식으로 분석한다.
 
-- [서비스 바로가기](https://veganism.streamlit.app/)
+- [라이브 데모](https://veganism.streamlit.app/)
 
 ## 아키텍처
 
