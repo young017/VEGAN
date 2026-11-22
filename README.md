@@ -26,7 +26,7 @@ graph LR
 ```mermaid
 flowchart TD
     classDef input  fill:#1F4D2B,stroke:#1F4D2B,color:#fff,font-weight:bold
-    classDef decide fill:#F2C14E,stroke:#C99A2E,color:#4A3500
+    classDef decide fill:#EBB48F,stroke:#C9824F,color:#4A2A10
     classDef proc   fill:#3F8F52,stroke:#2E6E3E,color:#fff
     classDef out    fill:#CFE8D3,stroke:#3F8F52,color:#1B3D24
 
