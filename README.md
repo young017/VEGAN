@@ -12,11 +12,12 @@
 
 ```mermaid
 graph LR
-    classDef main fill:#1b5e20,stroke:#1b5e20,color:#fff,font-weight:bold
-    classDef module fill:#4CAF50,stroke:#388E3C,color:#fff
+    classDef main   fill:#1F4D2B,stroke:#1F4D2B,color:#fff,font-weight:bold
+    classDef core   fill:#3F8F52,stroke:#2E6E3E,color:#fff,font-weight:bold
+    classDef module fill:#CFE8D3,stroke:#3F8F52,color:#1B3D24
     A[main.py]:::main -->|page = start| B[start.py]:::module
     A -->|page = infoslide| C[infoslide.py]:::module
-    A -->|page = chatbot| D[chatbot.py]:::module
+    A -->|page = chatbot| D[chatbot.py]:::core
     A -->|page = info| E[info.py]:::module
 ```
 
@@ -24,10 +25,10 @@ graph LR
 
 ```mermaid
 flowchart TD
-    classDef input  fill:#1b5e20,stroke:#1b5e20,color:#fff,font-weight:bold
-    classDef decide fill:#2E7D32,stroke:#1b5e20,color:#fff
-    classDef proc   fill:#4CAF50,stroke:#388E3C,color:#fff
-    classDef out    fill:#A5D6A7,stroke:#4CAF50,color:#1b5e20
+    classDef input  fill:#1F4D2B,stroke:#1F4D2B,color:#fff,font-weight:bold
+    classDef decide fill:#F2C14E,stroke:#C99A2E,color:#4A3500
+    classDef proc   fill:#3F8F52,stroke:#2E6E3E,color:#fff
+    classDef out    fill:#CFE8D3,stroke:#3F8F52,color:#1B3D24
 
     A[사용자 입력]:::input --> B{인사말 감지}:::decide
     B -->|Yes| C[고정 응답 반환]:::out
@@ -51,9 +52,9 @@ flowchart TD
 
 ```mermaid
 flowchart LR
-    classDef file   fill:#1b5e20,stroke:#1b5e20,color:#fff,font-weight:bold
-    classDef proc   fill:#4CAF50,stroke:#388E3C,color:#fff
-    classDef result fill:#A5D6A7,stroke:#4CAF50,color:#1b5e20,font-weight:bold
+    classDef file   fill:#1F4D2B,stroke:#1F4D2B,color:#fff,font-weight:bold
+    classDef proc   fill:#3F8F52,stroke:#2E6E3E,color:#fff
+    classDef result fill:#CFE8D3,stroke:#3F8F52,color:#1B3D24,font-weight:bold
 
     A[faiss_db_merged.zip]:::file -->|최초 1회 압축 해제| B[faiss_db_merged/]:::proc
     B -->|이중 구조 감지 시| C[내부 디렉토리]:::proc
@@ -212,3 +213,13 @@ client_email     = "...@....iam.gserviceaccount.com"
 4. App settings → Secrets에 위 toml 내용 붙여넣기
 
 `faiss_db_merged.zip`은 저장소 루트에 포함되어야 한다.
+
+## 알려진 한계
+
+| 항목 | 설명 |
+|------|------|
+| FAISS 필터 미지원 | `search_kwargs`의 `filter`를 지원하지 않아 검색 후 `metadata["source"]`로 수동 필터링 필요 |
+| 토큰 버퍼 | `ConversationBufferMemory`가 전체 대화를 보존하므로 장시간 사용 시 토큰 초과 가능 |
+| 칼로리 파싱 | GPT 응답 포맷에 의존하므로 응답이 달라지면 저장 실패 |
+| 단일 비건 유형 | UI에서 복수 선택 불가 |
+| 식품군 매칭 | 완전 일치 방식이라 오타/표기 변형 처리 없음 |
