@@ -1,3 +1,11 @@
+# <span style="color:#1b5e20">이오 — EcoVeganism Chatbot</span>
+
+[![Python](https://img.shields.io/badge/Python-3.8+-3776AB?style=flat-square&logo=python&logoColor=white)](https://www.python.org/)
+[![Streamlit](https://img.shields.io/badge/Streamlit-1.45.1-FF4B4B?style=flat-square&logo=streamlit&logoColor=white)](https://streamlit.io/)
+[![OpenAI](https://img.shields.io/badge/OpenAI-GPT-412991?style=flat-square&logo=openai&logoColor=white)](https://openai.com/)
+[![FAISS](https://img.shields.io/badge/Vector_DB-FAISS-00897B?style=flat-square)](https://github.com/facebookresearch/faiss)
+[![Deploy](https://img.shields.io/badge/Live-veganism.streamlit.app-success?style=flat-square)](https://veganism.streamlit.app/)
+
 # 이오 — EcoVeganism Chatbot
 
 식품 라벨 이미지를 업로드하면 OCR → RAG → GPT 파이프라인을 통해 비건 적합성, 알레르기, 칼로리, 환경 영향(LCA)을 개인화된 방식으로 분석한다.
